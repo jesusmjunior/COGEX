@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COGEX - Template Prezi Completo</title>
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== VARIÁVEIS E CONFIGURAÇÕES ========== */
+        :root {
+            --cor-vinho: #5A0F2C;
+            --cor-vinho-claro: #7a1c42;
+            --cor-vinho-escuro: #450823;
+            --cor-dourado: #FFD700;
+            --cor-dourado-claro: #FFE44D;
+            --cor-dourado-escuro: #E5C000;
+            --cor-preto: #000000;
+            --cor-bege: #F5F5DC;
+            --cor-bege-claro: #F8F8E8;
+            --fonte-titulo: 'Montserrat', sans-serif;
+            --fonte-corpo: 'Roboto', sans-serif;
+            --sombra-padrao: 0 4px 15px rgba(0,0,0,0.1);
+            --transicao-padrao: all 0.3s ease;
+            --borda-arredondada: 15px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--fonte-corpo);
+            background-color: var(--cor-bege);
+            color: var(--cor-preto);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* ========== UTILITÁRIOS ========== */
+        .container {
+            width: 100%;
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+        }
+        
+        .secao-slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: start;
+        }
+        
+        .conteudo-slide {
+            flex: 1;
+            padding: 40px 0 80px;
+            position: relative;
+            z-index: 5;
+        }
+        
+        .marca-dagua {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            opacity: 0.7;
+            z-index: 1;
+            font-family: var(--fonte-titulo);
+            font-weight: bold;
+            color: var(--cor-vinho);
+            font-size: 0.8rem;
+        }
+        
+        .secao-com-fundo {
+            position: relative;
+        }
+        
+        .secao-com-fundo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 1;
+        }
+        
+        /* ========== EFEITOS VISUAIS E ANIMAÇÕES ========== */
+        .overlay-textura {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%235a0f2c' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+            z-index: 0;
+        }
+        
+        .icone-fundo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            opacity: 0.03;
+            z-index: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .icone-balanca {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 10 L50 70 M30 15 L70 15 M20 35 C20 45, 30 55, 50 55 M50 55 C70 55, 80 45, 80 35 M20 35 L30 15 M80 35 L70 15 M50 70 L40 90 L60 90 L50 70' stroke='%235A0F2C' stroke-width='3' fill='none'/%3E%3Ccircle cx='20' cy='35' r='5' fill='%235A0F2C'/%3E%3Ccircle cx='80' cy='35' r='5' fill='%235A0F2C'/%3E%3C/svg%3E");
+        }
+        
+        .icone-documento {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30 10 L70 10 L70 90 L30 90 Z' stroke='%235A0F2C' stroke-width='2' fill='none'/%3E%3Cpath d='M40 30 L60 30 M40 40 L60 40 M40 50 L60 50 M40 60 L60 60 M40 70 L60 70' stroke='%235A0F2C' stroke-width='2'/%3E%3Ccircle cx='50' cy='15' r='3' fill='%235A0F2C'/%3E%3Ccircle cx='50' cy='85' r='3' fill='%235A0F2C'/%3E%3C/svg%3E");
+        }
+        
+        .icone-mapa {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20 20 C20 20, 30 10, 50 30 C70 50, 80 40, 80 40 L80 80 C80 80, 70 90, 50 70 C30 50, 20 60, 20 60 Z' stroke='%235A0F2C' stroke-width='2' fill='none'/%3E%3Ccircle cx='50' cy='50' r='5' fill='%235A0F2C'/%3E%3C/svg%3E");
+        }
+        
+        .brilho {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, rgba(255,215,0,0) 70%);
+            pointer-events: none;
+            z-index: 1;
+            filter: blur(8px);
+        }
+        
+        .brilho-1 {
+            top: 20%;
+            left: 10%;
+            animation: pulse 8s infinite alternate;
+        }
+        
+        .brilho-2 {
+            top: 60%;
+            left: 85%;
+            animation: pulse 12s infinite alternate-reverse;
+        }
+        
+        .brilho-3 {
+            top: 80%;
+            left: 30%;
+            animation: pulse 10s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shine {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+        
+        .animacao-fluida {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .efeito-brilho {
+            background: linear-gradient(90deg, 
+                       var(--cor-dourado-escuro) 0%, 
+                       var(--cor-dourado) 25%, 
+                       var(--cor-dourado-claro) 50%, 
+                       var(--cor-dourado) 75%, 
+                       var(--cor-dourado-escuro) 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 5s linear infinite;
+        }
+        
+        /* ========== COMPONENTES ========== */
+        .cabecalho {
+            background: linear-gradient(135deg, var(--cor-vinho), var(--cor-vinho-escuro));
+            padding: 20px 0;
+            position: relative;
+            box-shadow: var(--sombra-padrao);
+            z-index: 10;
+        }
+        
+        .cabecalho:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--cor-dourado), var(--cor-dourado-escuro));
+        }
+        
+        .cabecalho-flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .titulo-principal {
+            font-family: var(--fonte-titulo);
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--cor-dourado);
+            text-align: center;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .logo-cogex {
+            position: absolute;
+            top: 50%;
+            left: 40px;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 60px;
+            background-color: var(--cor-vinho);
+            border-radius: 10px;
+            border: 2px solid var(--cor-dourado);
+            box-shadow: var(--sombra-padrao);
+            z-index: 2;
+        }
+        
+        .logo-cogex span {
+            font-family: var(--fonte-titulo);
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--cor-dourado);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .container-conteudo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .caixa-titulo {
+            width: 100%;
+            background: linear-gradient(135deg, var(--cor-vinho), var(--cor-vinho-escuro));
+            padding: 20px 30px;
+            border-radius: var(--borda-arredondada);
+            margin-bottom: 30px;
+            box-shadow: var(--sombra-padrao);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .caixa-titulo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.05) 50%, transparent 75%);
+            background-size: 20px 20px;
+        }
+        
+        .titulo-secao {
+            font-family: var(--fonte-titulo);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--cor-dourado);
+            margin: 0;
+            position: relative;
+        }
+        
+        .caixa-conteudo {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: var(--borda-arredondada);
+            padding: 25px;
+            box-shadow: var(--sombra-padrao);
+            border: 1px solid rgba(90, 15, 44, 0.2);
+            transition: var(--transicao-padrao);
+        }
+        
+        .caixa-conteudo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .caixa-conteudo h3 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.5rem;
+            color: var(--cor-vinho);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--cor-dourado);
+            position: relative;
+        }
+        
+        .caixa-conteudo h3::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--cor-vinho);
+        }
+        
+        .caixa-conteudo p {
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .caixa-grafico {
+            flex: 2;
+            min-width: 500px;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: var(--borda-arredondada);
+            padding: 30px;
+            box-shadow: var(--sombra-padrao);
+            border: 2px solid var(--cor-dourado);
+            position: relative;
+            min-height: 400px;
+            transition: var(--transicao-padrao);
+        }
+        
+        .caixa-grafico:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .caixa-grafico h3 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--cor-vinho);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .caixa-destaque {
+            border-left: 5px solid var(--cor-dourado);
+            padding-left: 15px;
+            margin: 20px 0;
+            background-color: rgba(255, 215, 0, 0.05);
+            padding: 15px 20px;
+            border-radius: 0 var(--borda-arredondada) var(--borda-arredondada) 0;
+        }
+        
+        .lista-topicos {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .lista-topicos li {
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 30px;
+            line-height: 1.5;
+        }
+        
+        .lista-topicos li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background-color: var(--cor-dourado);
+            border-radius: 50%;
+            box-shadow: 0 0 0 2px rgba(90, 15, 44, 0.2);
+        }
+        
+        .rodape {
+            background: linear-gradient(135deg, var(--cor-vinho-escuro), var(--cor-vinho));
+            padding: 15px 0;
+            position: relative;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        
+        .rodape:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--cor-dourado-escuro), var(--cor-dourado));
+        }
+        
+        .rodape-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .texto-rodape {
+            color: white;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .num-slide {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--cor-dourado), var(--cor-dourado-escuro));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--fonte-titulo);
+            font-weight: 700;
+            color: var(--cor-vinho);
+            box-shadow: var(--sombra-padrao);
+        }
+        
+        .botao-acao {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, var(--cor-dourado), var(--cor-dourado-escuro));
+            color: var(--cor-vinho);
+            border-radius: 30px;
+            font-family: var(--fonte-titulo);
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: var(--sombra-padrao);
+            transition: var(--transicao-padrao);
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .botao-acao:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* ========== ESTILOS ESPECÍFICOS DOS SLIDES ========== */
+        /* INÍCIO: Slide de Capa */
+        .secao-capa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            padding: 0;
+            background: linear-gradient(135deg, rgba(90, 15, 44, 0.03) 0%, rgba(255, 215, 0, 0.03) 100%);
+        }
+        
+        .capa-conteudo {
+            padding: 40px;
+            border-radius: var(--borda-arredondada);
+            max-width: 90%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .capa-logo {
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .logo-circulo {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, var(--cor-vinho), var(--cor-vinho-escuro));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .logo-circulo span {
+            font-family: var(--fonte-titulo);
+            font-weight: 900;
+            font-size: 6rem;
+            color: var(--cor-dourado);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .logo-circulo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 2px solid var(--cor-dourado);
+            opacity: 0.5;
+            animation: pulse 3s infinite;
+        }
+        
+        .logo-detail {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--cor-dourado);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .detail-1 { top: 70px; right: 70px; animation: pulse 2s infinite alternate; }
+        .detail-2 { top: 70px; right: 90px; animation: pulse 2s infinite alternate 0.3s; }
+        .detail-3 { top: 90px; right: 70px; animation: pulse 2s infinite alternate 0.6s; }
+        .detail-4 { top: 90px; right: 90px; animation: pulse 2s infinite alternate 0.9s; }
+        .detail-5 { top: 110px; right: 70px; animation: pulse 2s infinite alternate 1.2s; }
+        .detail-6 { top: 130px; right: 70px; animation: pulse 2s infinite alternate 1.5s; }
+        .detail-7 { top: 150px; right: 70px; animation: pulse 2s infinite alternate 1.8s; }
+        .detail-8 { top: 150px; right: 90px; animation: pulse 2s infinite alternate 2.1s; }
+        .detail-9 { top: 150px; right: 110px; animation: pulse 2s infinite alternate 2.4s; }
+        
+        .capa-titulo {
+            font-family: var(--fonte-titulo);
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--cor-vinho);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.2;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .capa-titulo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--cor-dourado-escuro), var(--cor-dourado), var(--cor-dourado-escuro));
+        }
+        
+        .capa-subtitulo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--cor-preto);
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+        
+        .capa-gestao {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--cor-dourado), var(--cor-dourado-escuro));
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: var(--fonte-titulo);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-vinho);
+            margin-top: 30px;
+            box-shadow: var(--sombra-padrao);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .capa-gestao::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s infinite;
+            z-index: -1;
+        }
+        
+        /* INÍCIO: Slide de Gráficos */
+        .grafico-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 30px;
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .grafico-barras {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 300px;
+            margin-top: 20px;
+            padding-bottom: 40px;
+            position: relative;
+        }
+        
+        .grafico-barras:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--cor-vinho);
+            border-radius: 2px;
+        }
+        
+        .grafico-grupo {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 30px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+            animation-delay: calc(var(--delay) * 1s);
+        }
+        
+        .barra {
+            width: 80px;
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            box-shadow: var(--sombra-padrao);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .barra:hover {
+            transform: translateY(-10px);
+        }
+        
+        .barra::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--cor-dourado);
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .barra-judicial {
+            height: 180px;
+            background: linear-gradient(to top, var(--cor-vinho-escuro), var(--cor-vinho));
+        }
+        
+        .barra-extrajudicial {
+            height: 140px;
+            background: linear-gradient(to top, #000000, #333333);
+        }
+        
+        .barra-judicial-2023 {
+            height: 220px;
+        }
+        
+        .barra-extrajudicial-2023 {
+            height: 180px;
+        }
+        
+        .barra-judicial-2024 {
+            height: 260px;
+        }
+        
+        .barra-extrajudicial-2024 {
+            height: 220px;
+        }
+        
+        .barra::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 25%, rgba(255,255,255,0.1) 50%, transparent 75%);
+            animation: shine 5s infinite linear;
+        }
+        
+        .ano-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--fonte-titulo);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--cor-vinho);
+        }
+        
+        .valor {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: var(--fonte-corpo);
+            font-size: 0.8rem;
+            font-weight: 500;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 3px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .percentual {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: var(--fonte-corpo);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--cor-dourado);
+            text-shadow: 0 0 3px rgba(0,0,0,0.5);
+        }
+        
+        .linha-tendencia {
+            position: absolute;
+            top: 40%;
+            left: 60px;
+            width: calc(100% - 120px);
+            height: 3px;
+            background-color: red;
+            z-index: 10;
+            transform: rotate(-5deg);
+            box-shadow: 0 0 10px rgba(255,0,0,0.5);
+        }
+        
+        .legenda {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: var(--sombra-padrao);
+        }
+        
+        .legenda-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--fonte-titulo);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .legenda-cor {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .legenda-judicial {
+            background: linear-gradient(to top, var(--cor-vinho-escuro), var(--cor-vinho));
+        }
+        
+        .legenda-extrajudicial {
+            background: linear-gradient(to top, #000000, #333333);
+        }
+        
+        .legenda-tendencia {
+            width: 30px;
+            height: 3px;
+            background-color: red;
+            box-shadow: 0 0 5px rgba(255,0,0,0.5);
+        }
+        
+        .fonte-dados {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 0.8rem;
+            color: var(--cor-vinho);
+            font-style: italic;
+        }
+        
+        /* INÍCIO: Slide de Estrutura */
+        .organograma {
+            width: 100%;
+            margin-top: 30px;
+            position: relative;
+            padding: 20px;
+        }
+        
+        .org-nivel {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .org-nivel:after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background-color: var(--cor-vinho);
+        }
+        
+        .org-nivel:last-child:after {
+            display: none;
+        }
+        
+        .org-caixa {
+            background: linear-gradient(135deg, var(--cor-vinho), var(--cor-vinho-escuro));
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--sombra-padrao);
+            position: relative;
+            min-width: 250px;
+            transition: var(--transicao-padrao);
+        }
+        
+        .org-caixa:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .org-caixa::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+            border-radius: 10px;
+        }
+        
+        .org-caixa h4 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--cor-dourado);
+        }
+        
+        .org-caixa p {
+            font-size: 0.9rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        .org-caixa-principal {
+            background: linear-gradient(135deg, var(--cor-vinho), var(--cor-vinho-escuro));
+            border: 2px solid var(--cor-dourado);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .org-caixa-principal::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid var(--cor-dourado);
+            border-radius: 15px;
+            opacity: 0.5;
+            z-index: -1;
+        }
+        
+        .org-grupo {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: relative;
+        }
+        
+        .org-grupo:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 2px;
+            background-color: var(--cor-vinho);
+        }
+        
+        .org-conectores {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        /* INÍCIO: Slide de Projetos */
+        .projetos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .projeto-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--sombra-padrao);
+            border-left: 5px solid var(--cor-dourado);
+            transition: var(--transicao-padrao);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .projeto-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .projeto-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--cor-dourado-escuro), var(--cor-dourado), var(--cor-dourado-escuro));
+        }
+        
+        .projeto-card h3 {
+            font-family: var(--fonte-titulo);
+            font-size: 1.3rem;
+            color: var(--cor-vinho);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--cor-dourado);
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .projeto-card p {
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .projeto-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            background-color: var(--cor-dourado);
+            opacity: 0.1;
+            border-radius: 50% 0 0 0;
+        }
+        
+        /* INÍCIO: Slide de Parceiros */
+        .parceiros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .parceiro-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--sombra-padrao);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+            transition: var(--transicao-padrao);
+            border: 1px solid rgba(90, 15, 44, 0.1);
+        }
+        
+        .parceiro-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .parceiro-card img {
+            max-width: 100%;
+            max-height: 100px;
+            object-fit: contain;
+        }
+        
+        .parceiro-placeholder {
+            width: 120px;
+            height: 120px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        /* INÍCIO: Slide de Resultados */
+        .resultados-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .resultado-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--sombra-padrao);
+            transition: var(--transicao-padrao);
+            border: 1px solid rgba(90, 15, 44, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .resultado-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .resultado-icon {
+            font-size: 2.5rem;
+            color: var(--cor-dourado);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .resultado-valor {
+            font-family: var(--fonte-titulo);
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--cor-vinho);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .resultado-texto {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        /* INÍCIO: Slide de Encerramento */
+        .secao-encerramento {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(90, 15, 44, 0.05) 0%, rgba(255, 215, 0, 0.05) 100%);
+        }
+        
+        .encerramento-content {
+            padding: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .encerramento-titulo {
+            font-family: var(--fonte-titulo);
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--cor-vinho), var(--cor-vinho-escuro));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            line-height: 1;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .encerramento-texto {
+            font-family: var(--fonte-titulo);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--cor-vinho);
+            margin-bottom: 40px;
+        }
+        
+        .encerramento-assinatura {
+            font-family: var(--fonte-corpo);
+            font-size: 1.5rem;
+            color: var(--cor-preto);
+            opacity: 0.8;
+            margin-top: 60px;
+        }
+        
+        .encerramento-cargo {
+            font-family: var(--fonte-titulo);
+            font-size: 1.2rem;
+            color: var(--cor-dourado);
+            margin-top: 5px;
+            font-weight: 600;
+        }
+        
+        /* ========== ÁREA DE ASSETS E IMAGENS ========== */
+        /* Esta seção permite a fácil inserção de imagens nos slides */
+        .area-imagem {
+            width: 100%;
+            height: 250px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            border: 2px dashed rgba(90, 15, 44, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .area-imagem-texto {
+            position: absolute;
+            color: #888;
+            font-size: 1rem;
+            font-style: italic;
+            z-index: 1;
+        }
+        
+        .area-imagem img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            z-index: 2;
+        }
+        
+        /* Pode remover estas linhas ao inserir imagens reais */
+        .img-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            color: #888;
+            font-style: italic;
+            font-size: 0.9rem;
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        /* Tamanhos específicos para placeholders em diferentes áreas */
+        .img-logo {
+            width: 120px;
+            height: 80px;
+        }
+        
+        .img-slide {
+            width: 100%;
+            height: 250px;
+            border: 2px dashed rgba(90, 15, 44, 0.2);
+            margin: 20px 0;
+        }
+        
+        .img-grafico {
+            width: 100%;
+            height: 300px;
+        }
+        
+        .img-icone {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- INÍCIO: Efeitos Globais - Pode ser removido para otimização -->
+    <div class="overlay-textura"></div>
+    <div class="brilho brilho-1"></div>
+    <div class="brilho brilho-2"></div>
+    <div class="brilho brilho-3"></div>
+    <!-- FIM: Efeitos Globais -->
+    
+    <!-- INÍCIO: Slide 1 - Capa -->
+    <section class="secao-slide secao-capa" id="slide1">
+        <div class="icone-balanca icone-fundo"></div>
+        
+        <div class="capa-conteudo">
+            <div class="capa-logo animacao-fluida">
+                <div class="logo-circulo">
+                    <span class="efeito-brilho">C</span>
+                </div>
+                <!-- Elementos decorativos do logo - Pode ser removido ou ajustado -->
+                <div class="logo-detail detail-1"></div>
+                <div class="logo-detail detail-2"></div>
+                <div class="logo-detail detail-3"></div>
+                <div class="logo-detail detail-4"></div>
+                <div class="logo-detail detail-5"></div>
+                <div class="logo-detail detail-6"></div>
+                <div class="logo-detail detail-7"></div>
+                <div class="logo-detail detail-8"></div>
+                <div class="logo-detail detail-9"></div>
+            </div>
+            
+            <h1 class="capa-titulo">CORREGEDORIA GERAL DO<br>FORO EXTRAJUDICIAL</h1>
+            <h2 class="capa-subtitulo">Des. José Jorge Figueiredo dos Anjos<br>Corregedor Geral do Foro Extrajudicial</h2>
+            
+            <div class="capa-gestao">GESTÃO 2024-2026</div>
+        </div>
+        
+        <div class="marca-dagua">COGEX - TJMA</div>
+    </section>
+    <!-- FIM: Slide 1 - Capa -->
+    
+    <!-- INÍCIO: Slide 2 - A COGEX -->
+    <section class="secao-slide" id="slide2">
+        <div class="icone-documento icone-fundo"></div>
+        
+        <header class="cabecalho">
+            <div class="container">
+                <div class="cabecalho-flex">
+                    <div class="logo-cogex">
+                        <span>COGEX</span>
+                    </div>
+                    <h1 class="titulo-principal">A COGEX</h1>
+                </div>
+            </div>
+        </header>
+        
+        <div class="conteudo-slide">
+            <div class="container">
+                <div class="container-conteudo">
+                    <div class="caixa-titulo">
+                        <h2 class="titulo-secao">DEFINIÇÃO E MISSÃO INSTITUCIONAL</h2>
+                    </div>
+                    
+                    <div class="caixa-conteudo">
+                        <h3>Sobre a COGEX</h3>
+                        <p>A Corregedoria Geral do Foro Extrajudicial desempenha um papel vital na administração dos serviços públicos delegados pelo Poder Judiciário do Estado do Maranhão.</p>
+                        
+                        <div class="area-imagem">
+                            <!-- Remova a div abaixo e adicione: <img src="assets/cogex-building.jpg" alt="Sede da COGEX"> -->
+                            <div class="area-imagem-texto">Imagem da Sede da COGEX</div>
+                        </div>
+                        
+                        <p>Busca através da atividade orientadora e fiscalizadora, garantir a qualidade, segurança e agilidade da prestação "extrajurisdicional" de forma que a entrega "cogexiana" traduza em eficiência vez que, como órgão, tem como busca a construção de uma sociedade digna em direitos, justa em valores e socialmente menos desigual.</p>
+                    </div>
+                    
+                    <div class="caixa-conteudo">
+                        <h3>Objetivos Principais</h3>
+                        <ul class="lista-topicos">
+                            <li>Garantir a legalidade e eficiência dos serviços extrajudiciais</li>
+                            <li>Promover transparência nos serviços cartorários</li>
+                            <li>Fortalecer a cidadania através da confiabilidade dos serviços</li>
+                            <li>Supervisionar e orientar as atividades das serventias</li>
+                            <li>Fiscalizar o cumprimento das normas e procedimentos</li>
+                        </ul>
+                        
+                        <div class="caixa-destaque">
+                            <p>A COGEX representa um órgão essencial da administração do Poder Judiciário Maranhense, planejando, supervisionando, coordenando e fiscalizando os serviços delegados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="rodape">
+            <div class="container">
+                <div class="rodape-flex">
+                    <p class="texto-rodape">CORREGEDORIA DO FORO EXTRAJUDICIAL | TJMA</p>
+                    <p class="texto-rodape">2025</p>
+                </div>
+            </div>
+            <div class="num-slide">2</div>
+        </footer>
+    </section>
+    <!-- FIM: Slide 2 - A COGEX -->
+    
+    <!-- INÍCIO: Slide 3 - Objetivos da Apresentação -->
+    <section class="secao-slide" id="slide3">
+        <div class="icone-balanca icone-fundo"></div>
+        
+        <header class="cabecalho">
+            <div class="container">
+                <div class="cabecalho-flex">
+                    <div class="logo-cogex">
+                        <span>COGEX</span>
+                    </div>
+                    <h1 class="titulo-principal">OBJETIVO DA APRESENTAÇÃO</h1>
+                </div>
+            </div>
+        </header>
+        
+        <div class="conteudo-slide">
+            <div class="container">
+                <div class="container-conteudo">
+                    <div class="caixa-titulo">
+                        <h2 class="titulo-secao">EXPERIÊNCIA MARANHENSE</h2>
+                    </div>
+                    
+                    <div class="caixa-conteudo" style="flex: 1; min-width: 40%;">
+                        <h3>Propósito</h3>
+                        <p>Demonstrar a experiência maranhense com a criação da Corregedoria Geral do Foro Extrajudicial, destacando os avanços, desafios e resultados obtidos até o momento.</p>
+                        
+                        <div class="caixa-destaque">
+                            <p>Compartilhar as melhores práticas implementadas e os impactos positivos na qualidade e eficiência dos serviços extrajudiciais no estado.</p>
+                        </div>
+                        
+                        <a href="#" class="botao-acao">Saiba mais</a>
+                    </div>
+                    
+                    <div class="caixa-conteudo" style="flex: 1.5; min-width: 50%;">
+                        <div class="area-imagem" style="height: 350px;">
+                            <!-- Remova a div abaixo e adicione: <img src="assets/equipe-cogex.jpg" alt="Reunião da Equipe COGEX"> -->
+                            <div class="area-imagem-texto">Imagem da Reunião da Equipe COGEX</div>
+                        </div>
+                        
+                        <h3>Contexto e Importância</h3>
+                        <p>A especialização da Corregedoria para os serviços extrajudiciais representa um marco na modernização e aprimoramento dos serviços cartorários no Maranhão, com impacto direto na vida dos cidadãos e na segurança jurídica.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="rodape">
+            <div class="container">
+                <div class="rodape-flex">
+                    <p class="texto-rodape">CORREGEDORIA DO FORO EXTRAJUDICIAL | TJMA</p>
+                    <p class="texto-rodape">2025</p>
+                </div>
+            </div>
+            <div class="num-slide">3</div>
+        </footer>
+    </section>
+    <!-- FIM: Slide 3 - Objetivos da Apresentação -->
+    
+    <!-- INÍCIO: Slide 4 - Importância da Corregedoria -->
+    <section class="secao-slide secao-com-fundo" id="slide4">
+        <div class="icone-mapa icone-fundo"></div>
+        
+        <header class="cabecalho">
+            <div class="container">
+                <div class="cabecalho-flex">
+                    <div class="logo-cogex">
+                        <span>COGEX</span>
+                    </div>
+                    <h1 class="titulo-principal">IMPORTÂNCIA DA CORREGEDORIA</h1>
+                </div>
+            </div>
+        </header>
+        
+        <div class="conteudo-slide">
+            <div class="container">
+                <div class="container-conteudo">
+                    <div class="caixa-titulo">
+                        <h2 class="titulo-secao">PAPEL INSTITUCIONAL E RELEVÂNCIA SOCIAL</h2>
+                    </div>
+                    
+                    <div class="caixa-conteudo" style="flex: 1; min-width: 40%;">
+                        <div class="area-imagem">
+                            <!-- Remova a div abaixo e adicione: <img src="assets/logo-grande-cogex.png" alt="Logo COGEX"> -->
+                            <div class="area-imagem-texto">Logo Grande da COGEX</div>
+                        </div>
+                        
+                        <div class="caixa-destaque">
+                            <p>A Corregedoria Geral do Foro Extrajudicial tem como finalidade planejar, supervisionar, coordenar, orientar, controlar e fiscalizar os serviços delegados.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="caixa-conteudo" style="flex: 1.5; min-width: 50%;">
+                        <h3>Relevância Institucional</h3>
+                        <p>A Corregedoria Geral do Foro Extrajudicial é essencial para garantir a legalidade e eficiência dos serviços, promovendo transparência, fortalecendo a cidadania e garantindo a segurança e confiabilidade nos serviços entregues pelos cartorários maranhenses.</p>
+                        
+                        <h3>Impacto Social</h3>
+                        <p>Os serviços extrajudiciais impactam diretamente a vida das pessoas, desde o registro civil até a transferência de propriedades. A fiscalização e orientação adequadas garantem que estes serviços sejam prestados com segurança jurídica e eficiência.</p>
+                        
+                        <ul class="lista-topicos">
+                            <li>Proteção dos direitos individuais e coletivos</li>
+                            <li>Garantia da segurança jurídica das relações civis</li>
+                            <li>Promoção da desjudicialização e resolução de conflitos</li>
+                            <li>Facilitação do acesso à documentação essencial</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="rodape">
+            <div class="container">
+                <div class="rodape-flex">
+                    <p class="texto-rodape">CORREGEDORIA DO FORO EXTRAJUDICIAL | TJMA</p>
+                    <p class="texto-rodape">2025</p>
+                </div>
+            </div>
+            <div class="num-slide">4</div>
+        </footer>
+    </section>
+    <!-- FIM: Slide 4 - Importância da Corregedoria -->
+    
+    <!-- INÍCIO: Slide 5 - Arrecadação Comparativa -->
+    <section class="secao-slide" id="slide5">
+        <header class="cabecalho">
+            <div class="container">
+                <div class="cabecalho-flex">
+                    <div class="logo-cogex">
+                        <span>COGEX</span>
+                    </div>
+                    <h1 class="titulo-principal">ARRECADAÇÃO JUDICIAL X EXTRAJUDICIAL
